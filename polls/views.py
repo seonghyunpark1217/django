@@ -4,6 +4,10 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from .forms import QuestionForm, ChoiceFormSet
+from .models import Question
+from django.utils.timezone import now
+from django.shortcuts import render, redirect
 
 from .models import Choice, Question
 
@@ -70,3 +74,25 @@ def index(request):
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/detail.html", {"question": question})
+
+def add_question(request):
+    if request.method == "POST":
+        form = QuestionForm(request.POST)
+        formset = ChoiceFormSet(request.POST)
+
+        if form.is_valid() and formset.is_valid():
+            question = form.save(commit = False)
+            question.pub_date = now()
+            question.save()
+            choices = formset.save(commit = False)
+
+            for choice in choices:
+                choice.question = question
+                choice.save()
+
+            return redirect("polls:index")
+    else:
+        form = QuestionForm()
+        formset = ChoiceFormSet()
+
+    return render(request, "polls/add_question.html", {"form": form, "formset": formset})            
