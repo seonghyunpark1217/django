@@ -1,21 +1,40 @@
-{% extends "polls/base.html" %}
+{% extends 'polls/base.html' %}
 {% load static %}
 
 {% block content %}
+<div class="container mt-5">
+    <nav class="mb-3">
+        <a href="{% url 'polls:index' %}" class="btn btn-primary">← Back to Polls</a>
+    </nav>
 
-<h2>Add a New Question</h2>
+    <h1 class="text-center">Add a New Question</h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <div class="text-center my-3">
+        <img src="{% static 'polls/images/heart.png' %}" alt="Add Question" class="img-fluid" style="max-width: 50%;">
+    </div>
 
-    <h3>Choices:</h3>
-    {{ formset.management_form }}
-    {% for form in formset %}
-        {{ form.as_p }}
-    {% endfor %}
+    <form method="post" class="p-4 border rounded bg-light">
+        {% csrf_token %}
 
-    <button type="submit">Submit</button>
-</form>
+        <div class="mb-3">
+            <label for="id_question_text" class="form-label">Question:</label>
+            {{ form.question_text }}
+        </div>
+
+        <h3>Choices:</h3>
+        {{ formset.management_form }}
+        {% for choice_form in formset %}
+            <div class="mb-2">
+                {{ choice_form.choice_text }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success w-100 mt-3">Submit</button>
+    </form>
+</div>
+
+<footer class="text-center mt-5 p-3 bg-light">
+    <p>© 2025 Polls App | Created by Liam</p>
+</footer>
 
 {% endblock %}

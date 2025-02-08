@@ -1,11 +1,28 @@
-<a href="{% url 'polls:index' %}">Back to Home</a>
+{% extends "polls/base.html" %}
+{% load static %}
 
-<h1>{{ question.question_text }}</h1>
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="mb-4">{{ question.question_text }}</h1>
 
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
+    <img src="{% static 'polls/images/result.png' %}" alt="Poll Results" class="img-fluid rounded mb-4" width="400">
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+    <ul class="list-group text-left mx-auto" style="max-width: 400px;">
+        {% for choice in question.choice_set.all %}
+            <li class="list-group-item d-flex justify-content-between">
+                {{ choice.choice_text }}
+                <span class="badge bg-primary">{{ choice.votes }} votes</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-4">
+        <a href="{% url 'polls:detail' question.id %}" class="btn btn-warning">Vote Again</a>
+        <a href="{% url 'polls:index' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+
+<footer class="custom-footer">
+    <p>© 2025 Polls App. Created by Liam Park.</p>
+</footer>
+{% endblock %}

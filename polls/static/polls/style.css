@@ -1,7 +1,36 @@
-li a {
-  color: green;
+body {
+  background: url("images/marks.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-body {
-  background: white url("images/background.png") no-repeat;
+h1 {
+  color: #333;
+}
+
+.custom-footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f8f9fa; /* This is Bootstrap's bg-light */
+  border-top: 1px solid #ddd;
+}
+
+.custom-button {
+  background-color: #28a745; /* Same as Bootstrap's btn-success */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #218838; /* Darker shade for hover */
+}
+
+.no-poll-text {
+  color: #6c757d;
+    margin-top: 1.5rem;
 }

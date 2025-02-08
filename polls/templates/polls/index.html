@@ -1,16 +1,31 @@
+{% extends 'polls/base.html' %}
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
+{% block content %}
+<div class="text-center">
+  <h1>Polls List</h1>
 
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    <p></p>
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+  <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
-<a href="{% url 'polls:add_question' %}">Add a new question</a>
+  {% if latest_question_list %}
+      <ul class="list-group mt-4">
+          {% for question in latest_question_list %}
+              <li class="list-group-item">
+                  <a href="{% url 'polls:detail' question.id %}" class="text-decoration-none">
+                      {{ question.question_text }}
+                  </a>
+              </li>
+          {% endfor %}
+      </ul>
+  {% else %}
+      <p class="no-poll-text">No polls are available.</p>
+  {% endif %}
+
+  <div class="mt-3">
+      <a href="{% url 'polls:add_question' %}" class="custom-button">Add a New Question</a>
+  </div>
+</div>
+<footer class="custom-footer">
+  <p>© 2025 Polls App | Created by Liam</p>
+</footer>
+{% endblock %}
