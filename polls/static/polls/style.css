@@ -10,14 +10,14 @@ h1 {
 
 .custom-footer {
   text-align: center;
-  margin-top: 20px;
   padding: 15px;
-  background-color: #f8f9fa; /* This is Bootstrap's bg-light */
+  background-color: #f8f9fa;
   border-top: 1px solid #ddd;
+  width: 100%;
 }
 
 .custom-button {
-  background-color: #28a745; /* Same as Bootstrap's btn-success */
+  background-color: #28a745;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -27,7 +27,7 @@ h1 {
 }
 
 .custom-button:hover {
-  background-color: #218838; /* Darker shade for hover */
+  background-color: #218838;
 }
 
 .no-poll-text {
